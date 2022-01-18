@@ -10,5 +10,10 @@ describe "Parser" do
     fl = Parser.new("invalid_directory/invalid_file.txt")
     expect{fl.get_first_line}.to raise_error(RuntimeError, 'file or directory not found')
   end
+
+  it "checks if reading from valid file" do
+    fl = Parser.new("logs/games.log").get_first_line
+    expect(fl).to eql("  0:00 ------------------------------------------------------------")
+  end
 end
   
