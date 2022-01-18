@@ -83,5 +83,11 @@ To use the RSpec, you'll need to run the following command on your terminal:
 ```term
 bin/rspec
 ```
+## Running the app
 
+To run the app use the following command in your terminal from the root directory:
+
+```term
+ruby main.rb
+```
 ##
