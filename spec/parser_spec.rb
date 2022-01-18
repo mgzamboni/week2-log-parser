@@ -7,7 +7,7 @@ describe "Parser" do
   end
 
   it "checks if the file exists" do
-    fl = Parser.new("")
+    fl = Parser.new("invalid_directory/invalid_file.txt")
     expect{fl.get_first_line}.to raise_error(RuntimeError, 'file or directory not found')
   end
 end
