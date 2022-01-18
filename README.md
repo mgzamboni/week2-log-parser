@@ -52,13 +52,11 @@ Now you're ready to install rubies. Open a terminal (`Ctrl+Alt+T`) and run:
 ```term
 rvm install ruby
 ```
-```
 
 You''ll need ruby 3.1.0 to run this project. First, check your ruby version using the command:
 
 ```term
 ruby -v
-```
 ```
 
 ##
@@ -69,7 +67,6 @@ If your version is different from the mentioned earlier, you'll need to update y
 rvm install 3.1.0
 rvm use 3.1.0 --default
 ```
-```
 
 ## Installing the Bundler
 
@@ -78,7 +75,6 @@ You'll need to install the bundler environment that will be used to track and in
 ```term
 gem install bundler
 ```
-```
 
 ## Using the RSpec
 
@@ -86,7 +82,6 @@ To use the RSpec, you'll need to run the following command on your terminal:
 
 ```term
 bin/rspec
-```
 ```
 
 ##
