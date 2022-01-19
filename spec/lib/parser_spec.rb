@@ -16,8 +16,8 @@ describe 'Parser' do
     expect(fl).to eql("  0:00 ------------------------------------------------------------\n")
   end
 
-  it 'counts the number of lines of a file' do
-    fl = Parser.new('spec/fixtures/game_test.log').get_nlines
-    expect(fl).to eql(10)
+  it 'checks if it returns a valid json file with the right info' do
+    fl = Parser.new('spec/fixtures/game_test.log').get_nlines_json
+    expect(fl).to eql('{"game_test.log":{"lines":10}}')
   end
 end
