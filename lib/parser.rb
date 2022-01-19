@@ -11,6 +11,10 @@ class Parser
     first_line = File.foreach(file_pathname).first unless validate_file
   end
 
+  def get_nlines_json
+    {File.basename(file_pathname) => {:lines => get_nlines}}.to_json
+  end
+
   private
 
   def validate_file
