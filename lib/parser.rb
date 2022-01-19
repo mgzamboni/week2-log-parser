@@ -12,5 +12,13 @@ class Parser
       raise 'file or directory not found'
     end
   end
-  
+
+  def get_nlines
+    if File.file?(file_pathname)
+      first_line = File.foreach(file_pathname).inject(0) {|count, line| count+1}
+    else
+      raise 'file or directory not found'
+    end
+  end
+
 end
