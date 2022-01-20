@@ -11,7 +11,7 @@ class Parser
     File.foreach(file_pathname).first unless validate_file
   end
 
-  def get_nlines_json
+  def get_gamelog_json
     {File.basename(file_pathname) => {:lines => get_nlines}}.to_json
   end
 
@@ -24,5 +24,4 @@ class Parser
   def get_nlines
     File.foreach(file_pathname).inject(0) {|count, line| count+1} unless validate_file
   end 
-
 end
