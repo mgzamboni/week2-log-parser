@@ -1,6 +1,7 @@
 require_relative 'lib/parser.rb'
+require "json"
 
-fl = Parser.new('logs/games.log')
+file = Parser.new('spec/fixtures/game_test.log')
 
-puts fl.get_first_line
-puts fl.get_nlines_json
+puts "> get_first_line method return:\n#{file.get_first_line}\n"
+puts "> get_nlines_json method return:\n#{JSON.pretty_generate(JSON.parse(file.get_nlines_json))}\n"
