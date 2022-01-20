@@ -5,6 +5,7 @@ describe Parser do
   let(:invalid_file) {Parser.new 'invalid_folder/invalid_file.txt'}
 
   describe '#get_first_line' do
+  
     context 'when valid file' do
       it 'checks if it returns a valid string' do
         expect(valid_file.get_first_line).to eql("  0:00 ------------------------------------------------------------\n")
