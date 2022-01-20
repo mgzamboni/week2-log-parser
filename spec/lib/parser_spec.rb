@@ -5,7 +5,6 @@ describe Parser do
   let(:invalid_file) {Parser.new 'invalid_folder/invalid_file.txt'}
 
   describe '#get_first_line' do
-  
     context 'when valid file' do
       it 'checks if it returns a valid string' do
         expect(valid_file.get_first_line).to eql("  0:00 ------------------------------------------------------------\n")
@@ -17,11 +16,9 @@ describe Parser do
         expect{invalid_file.get_first_line}.to raise_error(RuntimeError, 'file or directory not found')
       end
     end
-
   end
 
   describe '#get_nlines_json' do
-
     context 'when valid file' do
       it 'checks if it returns a valid json with correrct info' do
         expect(valid_file.get_nlines_json).to eql('{"game_test.log":{"lines":10}}')
@@ -33,6 +30,5 @@ describe Parser do
         expect{invalid_file.get_nlines_json}.to raise_error(RuntimeError, 'file or directory not found')
       end
     end
-
   end
 end
