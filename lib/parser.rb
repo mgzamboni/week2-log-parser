@@ -8,7 +8,7 @@ class Parser
   end
 
   def get_first_line
-    first_line = File.foreach(file_pathname).first unless validate_file
+    File.foreach(file_pathname).first unless validate_file
   end
 
   def get_nlines_json
@@ -22,7 +22,7 @@ class Parser
   end
 
   def get_nlines
-    first_line = File.foreach(file_pathname).inject(0) {|count, line| count+1} unless validate_file
+    File.foreach(file_pathname).inject(0) {|count, line| count+1} unless validate_file
   end 
 
 end
