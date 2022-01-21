@@ -18,16 +18,16 @@ describe Parser do
     end
   end
 
-  describe '#get_nlines_json' do
+  describe '#get_gamelog_json' do
     context 'when valid file' do
       it 'checks if it returns a valid json with correrct info' do
-        expect(valid_file.get_nlines_json).to eql('{"game_test.log":{"lines":10}}')
+        expect(valid_file.get_gamelog_json).to eql('{"game_test.log":{"lines":10}}')
       end
     end
 
     context 'when invalid file' do
       it 'checks if it returns a runtime error' do
-        expect{invalid_file.get_nlines_json}.to raise_error(RuntimeError, 'file or directory not found')
+        expect{invalid_file.get_gamelog_json}.to raise_error(RuntimeError, 'file or directory not found')
       end
     end
   end
