@@ -14,12 +14,6 @@ class Parser
   end
 
   def gamelog_json
-    { File.basename(file_pathname) => { 'lines' => gamelog_data[0], 'players' => gamelog_data[1] } }.to_json
-  end
-
-  private
-
-  def gamelog_data
     players_arr = []
     count = 0
     File.foreach(file_pathname) do |line|
@@ -27,8 +21,10 @@ class Parser
       infochange_data(line.split(' '), players_arr)
       count += 1
     end
-    [count, players_arr]
+    { File.basename(file_pathname) => { 'lines' => count, 'players' => players_arr } }.to_json
   end
+
+  private
 
   def kill_data(log_line, players_arr)
     unless log_line[1] != 'Kill:'
