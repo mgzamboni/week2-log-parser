@@ -4,22 +4,20 @@ class Parser
   attr_accessor :file_pathname
 
   def initialize(file_pathname)
+    raise 'file or directory not found' unless File.file?(file_pathname)
+
     @file_pathname = file_pathname
   end
 
   def first_line
-    File.foreach(file_pathname).first unless validate_file
+    File.foreach(file_pathname).first
   end
 
   def gamelog_json
-    { File.basename(file_pathname) => { 'lines' => gamelog_data[0], 'players' => gamelog_data[1] } }.to_json unless validate_file
+    { File.basename(file_pathname) => { 'lines' => gamelog_data[0], 'players' => gamelog_data[1] } }.to_json
   end
 
   private
-
-  def validate_file
-    raise 'file or directory not found' unless File.file?(file_pathname)
-  end
 
   def gamelog_data
     players_arr = []
