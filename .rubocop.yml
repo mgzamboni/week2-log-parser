@@ -1,0 +1,6 @@
+AllCops:
+  Exclude:
+    - 'spec/lib/spec_helper.rb'
+    - 'bin/rspec'
+Style/FrozenStringLiteralComment:
+  Enabled: false
