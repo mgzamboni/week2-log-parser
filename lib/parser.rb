@@ -1,5 +1,7 @@
 require 'json'
 
+# This function will receive the path to a game.log file and will return
+# a json with filtered contents of the file.
 class Parser
   attr_accessor :file_pathname
 
