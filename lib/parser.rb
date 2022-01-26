@@ -14,34 +14,48 @@ class Parser
   end
 
   def gamelog_json
-    players_arr = []
-    count = 0
-    File.foreach(file_pathname) do |line|
-      kill_data(line.split(' '), players_arr)
-      infochange_data(line.split(' '), players_arr)
-      count += 1
-    end
-    { File.basename(file_pathname) => { 'lines' => count, 'players' => players_arr } }.to_json
+    { File.basename(file_pathname) => { 'lines' => count_lines, 'players' => filter_players } }.to_json
   end
 
   private
 
-  def kill_data(log_line, players_arr)
-    unless log_line[1] != 'Kill:'
-      killed_index = log_line.index 'killed'
-      by_index = log_line.index 'by'
-      player_killer = log_line[5..killed_index - 1].join(' ')
-      player_killed = log_line[killed_index + 1..by_index - 1].join(' ')
-      unless players_arr.include? player_killer
-        players_arr << player_killer unless player_killer == '<world>'
-      end
-      players_arr << player_killed unless players_arr.include? player_killed
+  def count_lines
+    File.foreach(file_pathname).count
+  end
+
+  def filter_players
+    players_arr = []
+    File.foreach(file_pathname) do |log_line|
+      kill_data(log_line, players_arr) if log_type(log_line, 'Kill')
+      infochange_data(log_line, players_arr) if log_type(log_line, 'ClientUserinfoChanged')
     end
+    players_arr
+  end
+
+  def kill_data(log_line, players_arr)
+    filter_killer(log_line.split(':', 4)[3].split(' '), players_arr)
+    filter_killed(log_line.split(':', 4)[3].split(' '), players_arr)
+  end
+
+  def word_index(log_line, word)
+    log_line.index word
+  end
+
+  def filter_killer(log_line, players_arr)
+    player_killer = log_line[0..word_index(log_line, 'killed') - 1].join(' ')
+    players_arr << player_killer if (!players_arr.include? player_killer) && (player_killer != '<world>')
+  end
+
+  def filter_killed(log_line, players_arr)
+    player_killed = log_line[word_index(log_line, 'killed') + 1..word_index(log_line, 'by') - 1].join(' ')
+    players_arr << player_killed unless players_arr.include? player_killed
   end
 
   def infochange_data(log_line, players_arr)
-    unless log_line[1] != 'ClientUserinfoChanged:'
-      players_arr << log_line[3].split('\\')[1] unless players_arr.include? log_line[3].split('\\')[1]
-    end
+    players_arr << log_line.split('\\', 3)[1] unless players_arr.include? log_line.split('\\', 3)[1]
+  end
+
+  def log_type(log_line, log_type)
+    log_line.split(' ')[1] == "#{log_type}:"
   end
 end
