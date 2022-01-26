@@ -21,7 +21,7 @@ describe Parser do
   describe '#gamelog_json' do
     context 'when valid file' do
       it 'checks if it returns a valid json with correrct info' do
-        expect(valid_file.gamelog_json).to eql('{"game_test.log":{"lines":100,"players":["Isgalamido","Dono","Mocinha"]}}')
+        expect(valid_file.gamelog_json).to eql('{"game_test.log":{"lines":100,"players":["Isgalamido","Dono da Bola","Mocinha"]}}')
       end
     end
 
