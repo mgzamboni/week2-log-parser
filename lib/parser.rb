@@ -32,13 +32,17 @@ class Parser
     players_arr
   end
 
+  def log_type(log_line, log_type)
+    log_line.split(' ')[1] == "#{log_type}:"
+  end
+
+  def infochange_data(log_line, players_arr)
+    players_arr << log_line.split('\\', 3)[1] unless players_arr.include? log_line.split('\\', 3)[1]
+  end
+
   def kill_data(log_line, players_arr)
     filter_killer(log_line.split(':', 4)[3].split(' '), players_arr)
     filter_killed(log_line.split(':', 4)[3].split(' '), players_arr)
-  end
-
-  def word_index(log_line, word)
-    log_line.index word
   end
 
   def filter_killer(log_line, players_arr)
@@ -51,11 +55,7 @@ class Parser
     players_arr << player_killed unless players_arr.include? player_killed
   end
 
-  def infochange_data(log_line, players_arr)
-    players_arr << log_line.split('\\', 3)[1] unless players_arr.include? log_line.split('\\', 3)[1]
-  end
-
-  def log_type(log_line, log_type)
-    log_line.split(' ')[1] == "#{log_type}:"
+  def word_index(log_line, word)
+    log_line.index word
   end
 end
