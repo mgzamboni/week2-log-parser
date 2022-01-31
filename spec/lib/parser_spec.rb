@@ -1,4 +1,4 @@
-require 'parser.rb'
+require 'parser'
 
 describe Parser do
   let(:valid_file) { Parser.new 'spec/fixtures/game_test.log' }
